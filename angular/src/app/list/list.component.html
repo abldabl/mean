@@ -1,0 +1,39 @@
+<div class="container">
+  <br>
+<h1>List of users</h1>
+<form name="userForm" #userForm='ngForm' (ngSubmit)="registerUserClick(userForm)">
+  <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="userService.selectedUser._id">
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input type="text" class="form-control" name="name" #name='ngModel' [(ngModel)]="userService.selectedUser.name" id="name"/>
+  </div>
+  <br>
+  <div class="form-group">
+    <label for="age">Age:</label>
+    <input type="number" class="form-control" name="age" #age='ngModel' [(ngModel)]="userService.selectedUser.age" id="age" />
+  </div>
+  <br>
+  <div class="panel-body">
+    <button type="submit" class="btn btn-sm btn-primary">Save</button>
+  </div>
+</form>
+  <br>
+<table class="table table-condensed table-striped table-bordered">
+  <thead><tr><th>Name</th><th>Age</th><th>Buttons</th></tr></thead>
+  <tbody>
+  <tr *ngFor="let user of userService.userList">
+    <td>{{user.name}}</td>
+    <td>{{user.age}}</td>
+    <td>
+      <a style="margin-right: 10px;" (click)="editClick(user)">
+        <i class="fas fa-edit"></i>
+      </a>
+      <a (click)="deleteClick(user._id,userForm)">
+        <i class="fas fa-trash-alt"></i>
+      </a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+  <button class="btn btn-danger center" (click)="signOut()">signout</button>
+</div>
